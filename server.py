@@ -1,10 +1,14 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask_cors import CORS
 import util
+
+CORS(app)  # allow cross-origin requests (for JS API call)
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 @app.route('/')
 def home():
     return render_template("app.html")
+
 
 
 @app.route('/get_location_names', methods=['GET'])
@@ -31,6 +35,5 @@ def predict_home_price():
     return response
 
 if __name__ == "__main__":
-    print("Starting Python Flask Server For Home Price Prediction...")
     util.load_saved_artifacts()
-    app.run()
+    app.run(debug=True)
