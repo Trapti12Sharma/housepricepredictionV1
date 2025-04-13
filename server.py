@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import util
 
-CORS(app)  # allow cross-origin requests (for JS API call)
+
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
+CORS(app)  # allow cross-origin requests (for JS API call)
 @app.route('/')
 def home():
     return render_template("app.html")
